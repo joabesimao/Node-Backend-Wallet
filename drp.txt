@@ -1,0 +1,69 @@
+# INFO GERAL : 
+
+#Nome do projeto 
+
+Carteira de Ações
+
+#Responsável pelo projeto
+
+Joabe Simão
+
+#Equipe de Desenvolvimento 
+
+Joabe Simão - Desenvolvimento backend
+
+#Cliente 
+
+Joabe Simão
+
+#Data Inicio 
+
+27/05/2025
+
+#versão 
+
+1.0.0
+
+* Objetivo do Projeto 
+
+informações para a compra e para manutenção de Ações
+
+*ESCOPO Projeto
+
+- trazer o valor das Ações do dia
+-mostrar o valor e as informações da ação selecionada
+-comprar uma acão 
+-mostrar o total das Ações do Usuario
+-gerar um relatorio
+
+* ESCOPO 
+
+---
+
+* REQUISITOS FUNCIONAIS
+
+cod       descrição                                                       prioridade
+01        o sistema deve permitir o login do usuario                      alta
+02        o sistema deve gerar relatorio                                  alta
+03        o sistema deve listar as ações do Usuario                       alta
+04        o sistema deve listar o preço das Ações do Usuario              alta
+05        o sistema deve selecionar uma acão e compra-la                  alta
+06        o sistema deve atualizar o valor das ações                      alta
+07        o sistema deve listar o valor do Dolar                          media
+08        o sistema deve listar o valor do Euro                           media
+
+* REQUISITOS NÃO FUNCIONAIS 
+
+cod       descrição                                                       prioridade
+
+A01     o sistema deve estar disponivel 99.9% do tempo                    alta
+A02     o tempo de resposta deve ser inferior a 5seg                      alta
+
+
+
+
+
+
+
+
+
