@@ -1,1 +1,11 @@
 node_modules
+node_modules
+./dist
+coverage
+data
+!src/data
+.vscode
+env.ts
+generated/prisma/
+.env
+dbsql
