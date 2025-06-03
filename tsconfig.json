@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "commonJS",
+    "target": "es2019",
+    "esModuleInterop": true,
+    "allowJs":true,
+     "types": ["node", "jest"] 
+  },
+  "include": ["src", "src/infra/db/mongodb/helpers/mongo-helper.ts","**/*.spec.ts",],
+  "exclude": [ "**/*.test.ts"]
+}
