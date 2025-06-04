@@ -1,7 +1,7 @@
-import { Client } from "../../models/client-model/client";
+import { Client, ClientModel } from "../../models/client-model/client";
 
 export interface AddClientModel {
-  client: Client;
+  client: ClientModel;
 }
 
 export interface AddClient {
