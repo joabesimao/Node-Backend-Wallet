@@ -1,6 +1,9 @@
 import { DbAddClient } from "./db-add-client";
 import { AddClientRepository } from "../../../protocols/db/client/add-client";
-import { Client } from "../../../../domain/models/client-model/client";
+import {
+  Client,
+  ClientModel,
+} from "../../../../domain/models/client-model/client";
 import { AddClientModel } from "../../../../domain/usescases/client/add-client";
 
 interface SutTypes {
@@ -16,6 +19,7 @@ const makeAddClient = (): AddClientModel => ({
 });
 
 const makeClient = (): Client => ({
+  id: 1,
   name: "any_name",
   document: "any_doc",
 });
@@ -50,5 +54,32 @@ describe("DbAddClient Usecase", () => {
         document: "any_doc",
       },
     });
+  });
+
+  test("Should add a client on success", async () => {
+    const { sut } = makeSut();
+    const client = await sut.add(makeAddClient());
+    expect(client).toEqual({
+      id: 1,
+      name: "any_name",
+      document: "any_doc",
+    });
+  });
+
+  test("Should throw if addClientRepository throws", async () => {
+    const { sut, clientRepositoryStub } = makeSut();
+    jest
+      .spyOn(clientRepositoryStub, "add")
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error("")))
+      );
+    const clientData = {
+      client: {
+        name: "any_name",
+        document: "any_doc",
+      },
+    };
+    const promise = sut.add(clientData);
+    await expect(promise).rejects.toThrow();
   });
 });

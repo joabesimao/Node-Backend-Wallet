@@ -1,7 +1,7 @@
-import { Position } from "../../models/position-model/position";
+import { Position, PositionModel } from "../../models/position-model/position";
 
 export interface AddPositionModel {
-  position: Position;
+  position: PositionModel;
 }
 
 export interface AddPosition {

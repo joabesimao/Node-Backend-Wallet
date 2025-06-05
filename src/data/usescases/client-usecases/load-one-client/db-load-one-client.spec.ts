@@ -8,6 +8,7 @@ interface SutTypes {
 }
 
 const makeClient = (): Client => ({
+  id: 1,
   name: "any_name",
   document: "any_doc",
 });
@@ -31,11 +32,33 @@ const makeSut = (): SutTypes => {
 };
 
 describe("DbLoadAllClient Usecase", () => {
+  const id = 8;
   test("Should call LoadOneClientRepository with correct values", async () => {
-    const id = 8;
     const { sut, clientRepositoryStub } = makeSut();
     const loadSpy = jest.spyOn(clientRepositoryStub, "loadOne");
     await sut.loadOne(id);
     expect(loadSpy).toHaveBeenCalledWith(8);
+  });
+
+  test("Should load one client on success", async () => {
+    const { sut } = makeSut();
+    const client = await sut.loadOne(id);
+    expect(client).toEqual({
+      id: 1,
+      name: "any_name",
+      document: "any_doc",
+    });
+  });
+
+  test("Should throw if LoadOneClientRepository throws", async () => {
+    const { sut, clientRepositoryStub } = makeSut();
+    jest
+      .spyOn(clientRepositoryStub, "loadOne")
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error("")))
+      );
+
+    const promise = sut.loadOne(id);
+    await expect(promise).rejects.toThrow();
   });
 });

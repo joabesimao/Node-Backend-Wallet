@@ -10,10 +10,12 @@ interface SutTypes {
 const makeClient = (): Client[] => {
   return [
     {
+      id: 1,
       name: "any_name",
       document: "",
     },
     {
+      id: 2,
       name: "other_name",
       document: "",
     },
@@ -38,12 +40,29 @@ const makeSut = (): SutTypes => {
   };
 };
 
-describe("DbLoadAllClient Usecase", () => {
+describe("DbDeleteClient Usecase", () => {
   const id = 7;
-  test("Should call LoadAllClientRepository with correct values", async () => {
+  test("Should call DeleteClientRepository with correct values", async () => {
     const { sut, clientRepositoryStub } = makeSut();
     const loadSpy = jest.spyOn(clientRepositoryStub, "delete");
     await sut.deleteById(id);
     expect(loadSpy).toHaveBeenCalledWith(7);
+  });
+
+  test("Should delete a client on success", async () => {
+    const { sut } = makeSut();
+    const client = await sut.deleteById(id);
+    expect(client).toEqual("Cliente Deletado com Sucesso!");
+  });
+
+  test("Should throw if DeleteClientRepository throws", async () => {
+    const { sut, clientRepositoryStub } = makeSut();
+    jest
+      .spyOn(clientRepositoryStub, "delete")
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error("")))
+      );
+    const promise = sut.deleteById(id);
+    await expect(promise).rejects.toThrow();
   });
 });

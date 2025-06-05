@@ -10,10 +10,12 @@ interface SutTypes {
 const makeClient = (): Client[] => {
   return [
     {
+      id: 1,
       name: "any_name",
       document: "",
     },
     {
+      id: 2,
       name: "other_name",
       document: "",
     },
@@ -44,5 +46,22 @@ describe("DbLoadAllClient Usecase", () => {
     const loadSpy = jest.spyOn(clientRepositoryStub, "loadAll");
     await sut.load();
     expect(loadSpy).toHaveBeenCalled();
+  });
+
+  test("Should loadAllClients on success", async () => {
+    const { sut } = makeSut();
+    const client = await sut.load();
+    expect(client).toEqual(makeClient());
+  });
+
+  test("Should throw if LoadAllClientRepository throws", async () => {
+    const { sut, clientRepositoryStub } = makeSut();
+    jest
+      .spyOn(clientRepositoryStub, "loadAll")
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error("")))
+      );
+    const promise = sut.load();
+    await expect(promise).rejects.toThrow();
   });
 });
