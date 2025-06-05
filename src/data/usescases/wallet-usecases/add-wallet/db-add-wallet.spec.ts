@@ -1,7 +1,7 @@
 import { DbAddWallet } from "./db-add-wallet";
-import { AddWalletRepository } from "../../../data/protocols/db/wallet/add-wallet";
-import { Wallet } from "../../../domain/models/wallet-model/wallet";
-import { AddWalletModel } from "../../../domain/usescases/wallet/add-wallet";
+import { AddWalletRepository } from "../../../protocols/db/wallet/add-wallet";
+import { Wallet } from "../../../../domain/models/wallet-model/wallet";
+import { AddWalletModel } from "../../../../domain/usescases/wallet/add-wallet";
 
 interface SutTypes {
   sut: DbAddWallet;
