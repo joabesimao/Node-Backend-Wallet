@@ -8,7 +8,7 @@ import { AddWalletRepository } from "../../../protocols/db/wallet/add-wallet";
 export class DbAddWallet implements AddWallet {
   constructor(private readonly addWalletRepository: AddWalletRepository) {}
   async add(wallet: AddWalletModel): Promise<Wallet> {
-    const walletAddict = await this.addWalletRepository.add(wallet);
-    return walletAddict;
+    const walletAdd = await this.addWalletRepository.add(wallet);
+    return walletAdd;
   }
 }
