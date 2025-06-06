@@ -58,8 +58,8 @@ const makeSut = (): SutTypes => {
   };
 };
 
-describe("addWallet Controller", () => {
-  test("Should call addWallet with correct values", async () => {
+describe("AddWallet Controller", () => {
+  test("Should call AddWallet with correct values", async () => {
     const { sut, addWalletStub } = makeSut();
     const addRegisterSpy = jest.spyOn(addWalletStub, "add");
     const fakeRequest = makeFakeRequest();
@@ -100,7 +100,7 @@ describe("addWallet Controller", () => {
     expect(httpResponse).toEqual(serverError(new Error()));
   });
 
-  test("Should return 200 on sucess", async () => {
+  test("Should add a wallet and return  200 on sucess", async () => {
     const { sut } = makeSut();
     const httpResponse = await sut.handle(makeFakeRequest());
     expect(httpResponse).toEqual(ok(makeFakeClientModel()));
