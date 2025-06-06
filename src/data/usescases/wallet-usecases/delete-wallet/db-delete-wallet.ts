@@ -1,7 +1,7 @@
 import { DeleteWalletRepository } from "../../../protocols/db/wallet/delete-wallet";
-import { DeleteById } from "../../../../domain/usescases/wallet/delete-wallet";
+import { DeleteWalletById } from "../../../../domain/usescases/wallet/delete-wallet";
 
-export class DbDeleteWallet implements DeleteById {
+export class DbDeleteWallet implements DeleteWalletById {
   constructor(
     private readonly deleteWalletRepository: DeleteWalletRepository
   ) {}
