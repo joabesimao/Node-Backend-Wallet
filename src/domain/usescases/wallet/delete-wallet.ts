@@ -1,3 +1,3 @@
-export interface DeleteById {
+export interface DeleteWalletById {
   deleteById(id: number): Promise<string>;
 }
