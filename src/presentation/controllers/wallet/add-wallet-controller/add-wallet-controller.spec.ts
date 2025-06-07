@@ -32,7 +32,7 @@ const makeFakeRequest = (): HttpRequest => ({
   },
 });
 
-const makeFakeClientModel = (): Wallet => ({
+const makeFakeWalletModel = (): Wallet => ({
   positions: [],
 });
 
@@ -41,12 +41,12 @@ interface SutTypes {
   addWalletStub: AddWallet;
 }
 const makeAddWalletStub = (): AddWallet => {
-  class AddClientStub implements AddWallet {
+  class AddWalletStub implements AddWallet {
     async add(wallet: AddWalletModel): Promise<Wallet> {
-      return new Promise((resolve) => resolve(makeFakeClientModel()));
+      return new Promise((resolve) => resolve(makeFakeWalletModel()));
     }
   }
-  return new AddClientStub();
+  return new AddWalletStub();
 };
 
 const makeSut = (): SutTypes => {
@@ -61,10 +61,10 @@ const makeSut = (): SutTypes => {
 describe("AddWallet Controller", () => {
   test("Should call AddWallet with correct values", async () => {
     const { sut, addWalletStub } = makeSut();
-    const addRegisterSpy = jest.spyOn(addWalletStub, "add");
+    const addWalletSpy = jest.spyOn(addWalletStub, "add");
     const fakeRequest = makeFakeRequest();
     await sut.handle(fakeRequest);
-    expect(addRegisterSpy).toHaveBeenCalledWith({
+    expect(addWalletSpy).toHaveBeenCalledWith({
       positions: [
         {
           id: 1,
@@ -88,7 +88,7 @@ describe("AddWallet Controller", () => {
     });
   });
 
-  test("Should return 500 if AddClient throws", async () => {
+  test("Should return 500 if AddWallet throws", async () => {
     const { sut, addWalletStub } = makeSut();
     jest
       .spyOn(addWalletStub, "add")
@@ -103,6 +103,6 @@ describe("AddWallet Controller", () => {
   test("Should add a wallet and return  200 on sucess", async () => {
     const { sut } = makeSut();
     const httpResponse = await sut.handle(makeFakeRequest());
-    expect(httpResponse).toEqual(ok(makeFakeClientModel()));
+    expect(httpResponse).toEqual(ok(makeFakeWalletModel()));
   });
 });
