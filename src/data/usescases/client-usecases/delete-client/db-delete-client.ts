@@ -1,11 +1,11 @@
-import { DeleteById } from "../../../../domain/usescases/wallet/delete-wallet";
+import { DeleteClientById } from "../../../../domain/usescases/client/delete-client";
 import { DeleteClientRepository } from "../../../protocols/db/client/delete-client";
 
-export class DbDeleteClient implements DeleteById {
+export class DbDeleteClient implements DeleteClientById {
   constructor(
     private readonly deleteClientRepository: DeleteClientRepository
   ) {}
-  async deleteById(id: number): Promise<string> {
+  async delete(id: number): Promise<string> {
     const deletedlient = await this.deleteClientRepository.delete(id);
     return deletedlient;
   }

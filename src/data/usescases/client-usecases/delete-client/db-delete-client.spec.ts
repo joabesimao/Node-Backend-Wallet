@@ -45,13 +45,13 @@ describe("DbDeleteClient Usecase", () => {
   test("Should call DeleteClientRepository with correct values", async () => {
     const { sut, clientRepositoryStub } = makeSut();
     const loadSpy = jest.spyOn(clientRepositoryStub, "delete");
-    await sut.deleteById(id);
+    await sut.delete(id);
     expect(loadSpy).toHaveBeenCalledWith(7);
   });
 
   test("Should delete a client on success", async () => {
     const { sut } = makeSut();
-    const client = await sut.deleteById(id);
+    const client = await sut.delete(id);
     expect(client).toEqual("Cliente Deletado com Sucesso!");
   });
 
@@ -62,7 +62,7 @@ describe("DbDeleteClient Usecase", () => {
       .mockReturnValueOnce(
         new Promise((resolve, reject) => reject(new Error("")))
       );
-    const promise = sut.deleteById(id);
+    const promise = sut.delete(id);
     await expect(promise).rejects.toThrow();
   });
 });
