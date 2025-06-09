@@ -1,7 +1,7 @@
-import { Stock } from "../../models/stock-model/stock";
+import { Stock, StockModel } from "../../models/stock-model/stock";
 
 export interface AddStockModel {
-  stock: Stock;
+  stock: StockModel;
 }
 
 export interface AddStock {
