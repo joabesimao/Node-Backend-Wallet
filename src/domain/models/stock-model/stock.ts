@@ -1,10 +1,10 @@
 export interface Stock {
   id: number;
-  name: String;
-  valueStock: Number;
+  name: string;
+  valueStock: number;
 }
 
 export interface StockModel {
-  name: String;
-  valueStock: Number;
+  name: string;
+  valueStock: number;
 }
