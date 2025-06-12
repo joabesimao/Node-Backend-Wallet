@@ -35,3 +35,9 @@ model Wallet {
   id       Int        @id @default(autoincrement())
   position Position[]
 }
+
+model LogError {
+  id    Int      @id @default(autoincrement())
+  stack String
+  date  DateTime
+}
