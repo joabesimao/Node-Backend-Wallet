@@ -6,7 +6,7 @@ pool
   .then(async () => {
     const app = (await import("./config/app")).default;
     app.listen(env.serverPort, () =>
-      console.log(`Server running at http://localhost:${env.serverPort}`)
+      console.log(`Server running at http://localhost:${env.port}`)
     );
   })
   .catch((err) => {
