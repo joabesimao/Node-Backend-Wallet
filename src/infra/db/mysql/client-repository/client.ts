@@ -16,8 +16,9 @@ export class ClientRepository
     DeleteClientRepository
 {
   async add(client: AddClientModel): Promise<Client> {
+    const { name, document } = client;
     const addClient = await prisma.client.create({
-      data: { name: client.client.name, document: client.client.document },
+      data: { name: name, document: document },
     });
     return addClient as unknown as Client;
   }
@@ -36,7 +37,7 @@ export class ClientRepository
   async loadOne(id: number): Promise<Client> {
     const oneClient = await prisma.client.findUnique({
       where: {
-        id: id,
+        id: Number(id),
       },
     });
     return oneClient;
@@ -44,18 +45,18 @@ export class ClientRepository
   async update(id: number, info: Partial<Client>): Promise<Client> {
     const updateClient = await prisma.client.update({
       where: {
-        id: id,
+        id: Number(id),
       },
       data: { ...info },
     });
     return updateClient;
   }
   async delete(id: number): Promise<string> {
-    const deleteClient = await prisma.client.delete({
+    await prisma.client.delete({
       where: {
-        id: id,
+        id: Number(id),
       },
     });
-    return deleteClient as unknown as string;
+    return "Deletado com Sucesso!";
   }
 }

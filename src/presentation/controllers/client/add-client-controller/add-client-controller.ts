@@ -10,6 +10,7 @@ export class AddClientController implements Controller {
       const addNewClient = await this.AddClient.add(httpRequest.body);
       return ok(addNewClient);
     } catch (error) {
+      console.log(error);
       return serverError(error);
     }
   }
