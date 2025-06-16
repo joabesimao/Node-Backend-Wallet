@@ -1,7 +1,8 @@
+import { Position } from "../../models/position-model/position";
 import { Wallet } from "../../models/wallet-model/wallet";
 
 export interface AddWalletModel {
-  wallet: Wallet;
+  positions: [];
 }
 
 export interface AddWallet {

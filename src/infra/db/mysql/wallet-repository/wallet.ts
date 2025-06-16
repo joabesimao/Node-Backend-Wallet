@@ -19,30 +19,29 @@ export class WalletRepository
 {
   async add(wallet: AddWalletModel): Promise<Wallet> {
     const addWallet = await prisma.wallet.create({
-      data: {
-        position: wallet.wallet.positions as any,
-      },
+      data: wallet,
     });
-    return addWallet as unknown as Wallet;
+    return addWallet as any;
   }
+
   async loadAll(): Promise<Wallet[]> {
-    const loadAllWallet = await prisma.wallet.findMany({
-      include: {
-        position: true,
-      },
-    });
+    const loadAllWallet = await prisma.wallet.findMany({});
     return loadAllWallet as unknown as Wallet[];
   }
+
   async loadOne(id: number): Promise<Wallet> {
     const loadOne = await prisma.wallet.findUnique({
-      where: { id: id },
+      where: {
+        id: Number(id),
+      },
     });
     return loadOne as unknown as Wallet;
   }
+
   async update(id: number, info: Partial<Wallet>): Promise<Wallet> {
     const updateWallet = await prisma.wallet.update({
       where: {
-        id: id,
+        id: Number(id),
       },
       data: {
         ...info,
@@ -50,10 +49,11 @@ export class WalletRepository
     });
     return updateWallet as unknown as Wallet;
   }
+
   async delete(id: number): Promise<string> {
     const deleteWallet = await prisma.wallet.delete({
       where: {
-        id: id,
+        id: Number(id),
       },
     });
     return deleteWallet as unknown as string;
