@@ -18,8 +18,8 @@ export class StockRepository
   async add(stock: AddStockModel): Promise<Stock> {
     const addStock = await prisma.stock.create({
       data: {
-        name: stock.stock.name,
-        valueStock: stock.stock.valueStock,
+        name: stock.name,
+        valueStock: stock.valueStock,
       },
     });
     return addStock;
@@ -37,7 +37,7 @@ export class StockRepository
   async loadOne(id: number): Promise<Stock> {
     const loadOneStock = await prisma.stock.findUnique({
       where: {
-        id: id,
+        id: Number(id),
       },
     });
     return loadOneStock;
@@ -45,11 +45,11 @@ export class StockRepository
 
   async update(id: number, info: Partial<Stock>): Promise<Stock> {
     const updateStock = await prisma.stock.update({
+      where: {
+        id: Number(id),
+      },
       data: {
         ...info,
-      },
-      where: {
-        id: id,
       },
     });
     return updateStock;
@@ -58,9 +58,9 @@ export class StockRepository
   async delete(id: number): Promise<string> {
     const deleteStock = await prisma.stock.delete({
       where: {
-        id: id,
+        id: Number(id),
       },
     });
-    return deleteStock as unknown as string;
+    return "Deletado com Sucesso!";
   }
 }
