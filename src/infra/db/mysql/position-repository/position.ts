@@ -18,10 +18,12 @@ export class PositionRepository
   async add(position: AddPositionModel): Promise<Position> {
     const addOnePosition = await prisma.position.create({
       data: {
-        stock: {},
-        Wallet: {},
-        quantity: position.position.quantity,
-        valueStock: position.position.stock.valueStock,
+        stock: {
+          connect: {
+            id: position.stock.id,
+          },
+        },
+        quantity: position.quantity,
       },
     });
     return addOnePosition as any;
@@ -31,7 +33,6 @@ export class PositionRepository
     const loadAllPosition = await prisma.position.findMany({
       include: {
         stock: true,
-        Wallet: true,
       },
     });
     return loadAllPosition;
@@ -40,7 +41,7 @@ export class PositionRepository
   async loadOne(id: number): Promise<Position> {
     const loadOnePosition = await prisma.position.findUnique({
       where: {
-        id: id,
+        id: Number(id),
       },
     });
     return loadOnePosition as unknown as Position;
@@ -49,7 +50,7 @@ export class PositionRepository
   async update(id: number, info: Partial<Position>): Promise<Position> {
     const updatePosition = await prisma.position.update({
       where: {
-        id: id,
+        id: Number(id),
       },
       data: {},
     });
@@ -58,7 +59,7 @@ export class PositionRepository
   async delete(id: number): Promise<string> {
     const deletePosition = await prisma.position.delete({
       where: {
-        id: id,
+        id: Number(id),
       },
     });
     return deletePosition as unknown as string;
