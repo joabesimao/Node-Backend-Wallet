@@ -15,10 +15,11 @@ model Client {
 }
 
 model Stock {
-  id         Int       @id @default(autoincrement())
+  id         Int    @id @default(autoincrement())
   name       String
   valueStock Int
-  Position   Position?
+
+  Position Position?
 }
 
 model Position {
@@ -26,8 +27,8 @@ model Position {
   stock    Stock   @relation(fields: [stockId], references: [id])
   quantity Int
   stockId  Int     @unique
-  walletId Int?
   Wallet   Wallet? @relation(fields: [walletId], references: [id])
+  walletId Int?
 }
 
 model Wallet {
