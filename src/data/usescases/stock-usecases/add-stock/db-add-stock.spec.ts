@@ -15,10 +15,7 @@ interface SutTypes {
 }
 
 const makeAddStock = (): AddStockModel => ({
-  stock: {
-    name: "any_name",
-    valueStock: 10,
-  },
+  name: "any_name",
 });
 
 const makeStock = (): Stock => ({

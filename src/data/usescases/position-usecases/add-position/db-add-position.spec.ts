@@ -9,13 +9,11 @@ interface SutTypes {
 }
 
 const makeAddPosition = (): AddPositionModel => ({
-  position: {
-    quantity: 1,
-    stock: {
-      id: 1,
-      name: "any_name",
-      valueStock: 10,
-    },
+  quantity: 1,
+  stock: {
+    id: 1,
+    name: "any_name",
+    valueStock: 10,
   },
 });
 
@@ -53,13 +51,11 @@ describe("DbAddPosition Usecase", () => {
     const addSpy = jest.spyOn(addPositionRepositoryStub, "add");
     await sut.add(makeAddPosition());
     expect(addSpy).toHaveBeenCalledWith({
-      position: {
-        quantity: 1,
-        stock: {
-          id: 1,
-          name: "any_name",
-          valueStock: 10,
-        },
+      quantity: 1,
+      stock: {
+        id: 1,
+        name: "any_name",
+        valueStock: 10,
       },
     });
   });

@@ -25,7 +25,6 @@ const makeFakeStock = (): Stock => ({
 
 const makeFakeStockModel = (): StockModel => ({
   name: "any_name",
-  valueStock: 5,
 });
 
 interface SutTypes {
@@ -58,7 +57,6 @@ describe("UpdateStock Controller", () => {
     await sut.handle(fakeRequest);
     expect(loadAllStockSpy).toHaveBeenCalledWith(1, {
       name: "any_name",
-      valueStock: 5,
     });
   });
 

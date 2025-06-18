@@ -12,10 +12,8 @@ interface SutTypes {
 }
 
 const makeAddClient = (): AddClientModel => ({
-  client: {
-    name: "any_name",
-    document: "any_doc",
-  },
+  name: "any_name",
+  document: "any_doc",
 });
 
 const makeClient = (): Client => ({
@@ -49,10 +47,8 @@ describe("DbAddClient Usecase", () => {
     const addSpy = jest.spyOn(clientRepositoryStub, "add");
     await sut.add(makeAddClient());
     expect(addSpy).toHaveBeenCalledWith({
-      client: {
-        name: "any_name",
-        document: "any_doc",
-      },
+      name: "any_name",
+      document: "any_doc",
     });
   });
 
@@ -74,10 +70,8 @@ describe("DbAddClient Usecase", () => {
         new Promise((resolve, reject) => reject(new Error("")))
       );
     const clientData = {
-      client: {
-        name: "any_name",
-        document: "any_doc",
-      },
+      name: "any_name",
+      document: "any_doc",
     };
     const promise = sut.add(clientData);
     await expect(promise).rejects.toThrow();

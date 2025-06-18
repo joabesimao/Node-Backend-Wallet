@@ -27,7 +27,6 @@ const makeFakeStockList = (): Stock[] => [
 
 const makeFakeStockModel = (): StockModel => ({
   name: "any_name",
-  valueStock: 5,
 });
 
 interface SutTypes {
