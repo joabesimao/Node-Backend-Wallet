@@ -3,9 +3,11 @@ import { DeleteStockRepository } from "../../../../data/protocols/db/stock/delet
 import { LoadAllStockRepository } from "../../../../data/protocols/db/stock/load-all-stock";
 import { LoadOneStockRepository } from "../../../../data/protocols/db/stock/load-one-stock";
 import { UpdateStockRepository } from "../../../../data/protocols/db/stock/update-stock";
+import { ApiGateway } from "../../../../domain/models/gateways/stock-api-gateway";
 import { Stock } from "../../../../domain/models/stock-model/stock";
 import { AddStockModel } from "../../../../domain/usescases/stock/add-stock";
-import { prisma } from "../helper";
+import { prisma, marketStackURLAndKey } from "../helper";
+import axios from "axios";
 
 export class StockRepository
   implements
@@ -13,13 +15,36 @@ export class StockRepository
     LoadAllStockRepository,
     LoadOneStockRepository,
     UpdateStockRepository,
-    DeleteStockRepository
+    DeleteStockRepository,
+    ApiGateway
 {
+  private readonly baseUrl = marketStackURLAndKey.url;
+  private readonly apiKey = marketStackURLAndKey.key;
+
+  async getStock(
+    symbol: string
+  ): Promise<{ symbol: string; price: number; date: string }> {
+    const response = await axios.get(`${this.baseUrl}eod`, {
+      params: {
+        access_key: this.apiKey,
+        symbols: symbol,
+      },
+    });
+    const data = response.data.data?.[0];
+    if (!data) throw new Error("dados nao encontrados");
+    return {
+      symbol: data.symbol,
+      date: data.date,
+      price: data.close,
+    };
+  }
+
   async add(stock: AddStockModel): Promise<Stock> {
+    const list = await this.getStock(stock.name);
     const addStock = await prisma.stock.create({
       data: {
-        name: stock.name,
-        valueStock: stock.valueStock,
+        name: list.symbol,
+        valueStock: list.price,
       },
     });
     return addStock;
@@ -56,7 +81,7 @@ export class StockRepository
   }
 
   async delete(id: number): Promise<string> {
-    const deleteStock = await prisma.stock.delete({
+    await prisma.stock.delete({
       where: {
         id: Number(id),
       },

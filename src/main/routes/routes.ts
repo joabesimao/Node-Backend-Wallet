@@ -20,6 +20,8 @@ import { makeLoadOneWalletController } from "../factories/wallet/load-one-wallet
 import { makeAddWalletController } from "../factories/wallet/add-wallet";
 import { makeUpdateWalletController } from "../factories/wallet/update-wallet";
 import { makeDeleteWalletController } from "../factories/wallet/delete-wallet";
+import axios from "axios";
+import { makeLoadStocksController } from "../factories/gateway/gateway-factory";
 
 export default (router: Router): void => {
   router.get("/client", adaptRoute(makeLoadAllClientController()));
@@ -45,4 +47,6 @@ export default (router: Router): void => {
   router.post("/wallet", adaptRoute(makeAddWalletController()));
   router.put("/wallet/:id", adaptRoute(makeUpdateWalletController()));
   router.delete("/wallet/:id", adaptRoute(makeDeleteWalletController()));
+
+  router.get("/lista/:symbol", adaptRoute(makeLoadStocksController()));
 };

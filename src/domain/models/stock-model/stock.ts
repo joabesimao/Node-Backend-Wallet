@@ -6,5 +6,4 @@ export interface Stock {
 
 export interface StockModel {
   name: string;
-  valueStock: number;
 }
