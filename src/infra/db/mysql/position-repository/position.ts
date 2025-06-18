@@ -26,7 +26,7 @@ export class PositionRepository
         quantity: position.quantity,
       },
     });
-    return addOnePosition as any;
+    return addOnePosition as unknown as Position;
   }
 
   async loadAll(): Promise<Position[]> {
@@ -57,11 +57,11 @@ export class PositionRepository
     return updatePosition as unknown as Position;
   }
   async delete(id: number): Promise<string> {
-    const deletePosition = await prisma.position.delete({
+    await prisma.position.delete({
       where: {
         id: Number(id),
       },
     });
-    return deletePosition as unknown as string;
+    return "Position Deletado com Sucesso!";
   }
 }

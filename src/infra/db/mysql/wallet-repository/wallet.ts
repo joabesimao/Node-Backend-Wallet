@@ -6,7 +6,6 @@ import { LoadOneWalletRepository } from "../../../../data/protocols/db/wallet/lo
 import { UpdateWalletRepository } from "../../../../data/protocols/db/wallet/update-wallet";
 import { Wallet } from "../../../../domain/models/wallet-model/wallet";
 import { AddWalletModel } from "../../../../domain/usescases/wallet/add-wallet";
-import { DeleteWalletById } from "../../../../domain/usescases/wallet/delete-wallet";
 import { prisma } from "../helper";
 
 export class WalletRepository
@@ -32,7 +31,7 @@ export class WalletRepository
         position: true,
       },
     });
-    return addWallet as undefined;
+    return addWallet as unknown as Wallet;
   }
 
   async loadAll(): Promise<Wallet[]> {
@@ -70,11 +69,11 @@ export class WalletRepository
   }
 
   async delete(id: number): Promise<string> {
-    const deleteWallet = await prisma.wallet.delete({
+    await prisma.wallet.delete({
       where: {
         id: Number(id),
       },
     });
-    return deleteWallet as unknown as string;
+    return "Wallet Deletada com Sucesso!";
   }
 }
