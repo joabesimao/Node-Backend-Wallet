@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id       Int    @id @default(autoincrement())
+  name     String
+  document String
+}
+
+model Stock {
+  id         Int    @id @default(autoincrement())
+  name       String
+  valueStock Int
+
+  Position Position?
+}
+
+model Position {
+  id       Int     @id @default(autoincrement())
+  stock    Stock   @relation(fields: [stockId], references: [id])
+  quantity Int
+  stockId  Int     @unique
+  Wallet   Wallet? @relation(fields: [walletId], references: [id])
+  walletId Int?
+}
+
+model Wallet {
+  id       Int        @id @default(autoincrement())
+  position Position[]
+}
+
+model LogError {
+  id    Int      @id @default(autoincrement())
+  stack String
+  date  DateTime
+}

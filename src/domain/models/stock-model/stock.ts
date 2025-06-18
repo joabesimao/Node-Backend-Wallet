@@ -1,5 +1,9 @@
 export interface Stock {
-  id: Number;
-  name: String;
-  valueStock: Number;
+  id?: number;
+  name: string;
+  valueStock: number;
+}
+
+export interface StockModel {
+  name: string;
 }

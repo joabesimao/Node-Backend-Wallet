@@ -9,28 +9,26 @@ interface SutTypes {
 }
 
 const makeAddWallet = (): AddWalletModel => ({
-  wallet: {
-    positions: [
-      {
+  positions: [
+    {
+      id: 1,
+      quantity: 1,
+      stock: {
         id: 1,
-        quantity: 1,
-        stock: {
-          id: 1,
-          name: "any_name",
-          valueStock: 10,
-        },
+        name: "any_name",
+        valueStock: 10,
       },
-      {
+    },
+    {
+      id: 2,
+      quantity: 2,
+      stock: {
         id: 2,
-        quantity: 2,
-        stock: {
-          id: 2,
-          name: "other_name",
-          valueStock: 20,
-        },
+        name: "other_name",
+        valueStock: 20,
       },
-    ],
-  },
+    },
+  ],
 });
 
 const makeWallet = (): Wallet => ({
