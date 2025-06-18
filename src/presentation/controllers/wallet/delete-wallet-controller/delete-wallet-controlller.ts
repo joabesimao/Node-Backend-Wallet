@@ -12,7 +12,6 @@ export class DeleteWalletController implements Controller {
       );
       return ok(deletedWallet);
     } catch (error) {
-      console.log(error);
       return serverError(error);
     }
   }

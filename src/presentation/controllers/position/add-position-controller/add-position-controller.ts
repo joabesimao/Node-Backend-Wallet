@@ -11,7 +11,6 @@ export class AddPositionController implements Controller {
       const addNewPosition = await this.addPosition.add(httpRequest.body);
       return ok(addNewPosition);
     } catch (error) {
-      console.log(error);
       return serverError(error);
     }
   }

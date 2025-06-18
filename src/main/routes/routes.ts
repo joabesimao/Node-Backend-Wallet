@@ -20,7 +20,6 @@ import { makeLoadOneWalletController } from "../factories/wallet/load-one-wallet
 import { makeAddWalletController } from "../factories/wallet/add-wallet";
 import { makeUpdateWalletController } from "../factories/wallet/update-wallet";
 import { makeDeleteWalletController } from "../factories/wallet/delete-wallet";
-import axios from "axios";
 import { makeLoadStocksController } from "../factories/gateway/gateway-factory";
 
 export default (router: Router): void => {

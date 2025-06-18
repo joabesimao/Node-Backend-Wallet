@@ -10,7 +10,6 @@ export class AddStockController implements Controller {
       const addStock = await this.addStock.add(httpRequest.body);
       return ok(addStock);
     } catch (error) {
-      console.log(error);
       return serverError(error);
     }
   }

@@ -11,7 +11,6 @@ export class StockController implements Controller {
       const result = await this.service.execute(symbol);
       return ok(result);
     } catch (error) {
-      console.log(error);
       return serverError(error);
     }
   }

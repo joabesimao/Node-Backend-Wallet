@@ -10,7 +10,6 @@ export class AddWalletController implements Controller {
       const addWallet = await this.addWallet.add(httpRequest.body);
       return ok(addWallet);
     } catch (error) {
-      console.log(error);
       return serverError(error);
     }
   }
