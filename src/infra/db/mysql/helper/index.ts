@@ -11,3 +11,8 @@ export const pool = mysql.createPool({
   password: env.password,
   database: env.database,
 });
+
+export const marketStackURLAndKey = {
+  url: env.baseUrl,
+  key: env.apiKey,
+};
