@@ -38,7 +38,11 @@ export class WalletRepository
   async loadAll(): Promise<Wallet[]> {
     const loadAllWallet = await prisma.wallet.findMany({
       include: {
-        position: true,
+        position: {
+          include: {
+            stock: true,
+          },
+        },
       },
     });
     return loadAllWallet as unknown as Wallet[];
