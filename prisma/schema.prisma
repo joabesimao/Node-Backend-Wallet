@@ -19,21 +19,21 @@ model Stock {
   name       String
   valueStock Int
 
-  Position Position?
+  Position Position[]
 }
 
 model Position {
   id       Int     @id @default(autoincrement())
   stock    Stock   @relation(fields: [stockId], references: [id])
   quantity Int
-  stockId  Int     @unique
+  stockId  Int
   Wallet   Wallet? @relation(fields: [walletId], references: [id])
   walletId Int?
 }
 
 model Wallet {
-  id       Int        @id @default(autoincrement())
-  position Position[]
+  id        Int        @id @default(autoincrement())
+  positions Position[]
 }
 
 model LogError {

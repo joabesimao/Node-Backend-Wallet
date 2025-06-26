@@ -17,27 +17,32 @@ export class WalletRepository
     DeleteWalletRepository
 {
   async add(wallet: AddWalletModel): Promise<Wallet> {
-    const positions = await prisma.position.findMany();
-
-    const addWallet = await prisma.wallet.create({
+    const createdWallet = await prisma.wallet.create({
       data: {
-        position: {
-          connect: positions.map((pos) => ({
-            id: pos.id,
+        positions: {
+          create: wallet.positions.map((pos) => ({
+            quantity: pos.quantity,
+            stock: {
+              connect: {
+                id: pos.stockId,
+              },
+            },
           })),
         },
       },
       include: {
-        position: true,
+        positions: {
+          include: { stock: true }, 
+        },
       },
     });
-    return addWallet as unknown as Wallet;
+    return createdWallet as unknown as Wallet;
   }
 
   async loadAll(): Promise<Wallet[]> {
     const loadAllWallet = await prisma.wallet.findMany({
       include: {
-        position: {
+        positions: {
           include: {
             stock: true,
           },
@@ -62,7 +67,7 @@ export class WalletRepository
         id: Number(id),
       },
       data: {
-        ...info,
+        positions: {},
       },
     });
     return updateWallet as unknown as Wallet;
