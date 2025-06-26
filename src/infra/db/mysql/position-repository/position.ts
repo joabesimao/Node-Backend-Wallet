@@ -24,6 +24,11 @@ export class PositionRepository
           },
         },
         quantity: position.quantity,
+        Wallet: {
+          connect: {
+            id: 1,
+          },
+        },
       },
     });
     return addOnePosition as unknown as Position;
