@@ -1,9 +1,10 @@
 import axios from "axios";
+import { marketStackURLAndKey } from "../../infra/db/mysql/helper/index";
 import { ApiGateway } from "../../domain/models/gateways/stock-api-gateway";
 
 export class marketStackApi implements ApiGateway {
-  private readonly baseUrl = "http://api.marketstack.com/v1/";
-  private readonly apiKey = "860421d97cce92d558fefa68c26c74f5";
+  private readonly baseUrl = marketStackURLAndKey.url;
+  private readonly apiKey = marketStackURLAndKey.key;
 
   async getStock(
     symbol: string
